@@ -4,7 +4,9 @@ import BudgetCalculatorPanel from "../components/Dashboard/BudgetCalculatorPanel
 import ProfilePanel from "../components/Dashboard/ProfilePanel";
 import RealWeddingPanel from "../components/Dashboard/RealWeddingPanel";
 import GuestManagementPanel from "../components/Dashboard/GuestManagementPanel";
-
+import MyReview from "../components/Dashboard/MyReview";
+import MyReviews from "../components/Dashboard/UserReviewsWidget";
+import WeddingWebsitePanel from "../components/Dashboard/WeddingWebsitePanel";
 const SIDEBAR_ITEMS = [
   "Dashboard",
   "My Profile",
@@ -135,29 +137,13 @@ export default function WeddingDashboard() {
           <main className="flex-1 space-y-6">
             {activeSection === "Dashboard" && <DashboardOverview />}
             {activeSection === "My Profile" && <ProfilePanel />}
-            {/* {activeSection === "Vendor Manager" && (
-              <Placeholder
-                title="Vendor Manager"
-                subtitle="0 di 0 categorie assunte. Inizia a costruire il tuo team di fornitori."
-              />
-            )} */}
             {activeSection === "Checklist" && <ChecklistPanel />}
             {activeSection === "Budget Calculator" && <BudgetCalculatorPanel />}
             {activeSection === "Real Wedding" && <RealWeddingPanel />}
             {activeSection === "Guest Management" && <GuestManagementPanel />}
-
-            {activeSection === "My Reviews" && (
-              <Placeholder
-                title="My Reviews"
-                subtitle="Troverai qui tutte le recensioni che hai scritto."
-              />
-            )}
-            {activeSection === "Wedding Website" && (
-              <Placeholder
-                title="Wedding Website"
-                subtitle="Crea un sito web per il tuo matrimonio da condividere con gli invitati."
-              />
-            )}
+            {activeSection === "My Review" && <MyReview />}
+            {activeSection === "My Reviews" && <MyReviews />}
+            {activeSection === "Wedding Website" && <WeddingWebsitePanel />}
           </main>
         </div>
       </div>
