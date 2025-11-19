@@ -11,7 +11,7 @@ export default function Footer() {
                             {/* Logo */}
                             <Link to="/" className="flex items-center gap-1">
                                 <div className="w-10 rounded-full  flex items-center justify-center text-white text-lg font-semibold">
-                                    <img src="/src/assets/logo.png" alt="" />
+                                    <img src="https://i.imgur.com/wDJcqWi.png" alt="" />
                                 </div>
                                 <span className="font-semibold text-lg tracking-tight">
                                     <span className="text-slate-900">Mio</span>
