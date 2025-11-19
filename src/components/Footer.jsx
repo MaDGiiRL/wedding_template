@@ -39,7 +39,7 @@ export default function Footer() {
 
                 <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 pt-4">
                     <p className="text-xs text-slate-400">
-                        © {new Date().getFullYear()} MioMatrimonio. Tutti i diritti riservati.
+                        © {new Date().getFullYear()} MioMatrimonio. Tutti i diritti riservati. Developer with ❤️ by MaDGiiRL.
                     </p>
                     <div className="flex items-center gap-4 text-xs text-slate-400">
                         <button>Termini e condizioni</button>
