@@ -38,7 +38,7 @@ function HeroSection() {
 
                 <div className="relative">
                     <div className="rounded-3xl bg-white shadow-xl shadow-rose-100/60 p-4 space-y-4">
-                        <div className="h-40 rounded-2xl bg-[url('https://images.pexels.com/photos/3951628/pexels-photo-3951628.jpeg?auto=compress&cs=tinysrgb&w=800')] bg-cover bg-center" />
+                        <div className="h-60 rounded-2xl bg-[url('https://i.imgur.com/wDJcqWi.png')] bg-contain bg-center bg-no-repeat" />
                         <div className="grid grid-cols-2 gap-3 text-xs">
                             <div className="rounded-2xl bg-slate-50 p-3">
                                 <p className="font-semibold text-slate-900">Location romantiche</p>

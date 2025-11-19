@@ -1,0 +1,12 @@
+{
+  "name": "slides",
+  "version": "1.0.0",
+  "main": "index.md",
+  "scripts": {
+    "start": "reveal-md -w  --theme night --highlightTheme tomorrow-night-bright --port 1337 --css slides/assets/styles.css --static-dirs=slides/assets --template slides/assets/template.html slides/"
+  },
+  "dependencies": {
+    "reveal-md": "^5.4.1"
+  }
+}
+

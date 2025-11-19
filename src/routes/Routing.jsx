@@ -5,6 +5,10 @@ import Login from "../pages/Login";
 import Registrati from "../pages/Registrati";
 import RegistrazioneFornitori from "../pages/RegistrazioneFornitori";
 import WeddingDashboard from "../pages/WeddingDashboard";
+import FornitoriPage from "../pages/FornitoriPage";
+import IspirazioniPage from "../pages/IspirazioniPage";
+import IdeeConsigliPage from "../pages/IdeeConsigliPage";
+import CommunityPage from "../pages/CommunityPage";
 
 export default function Routing() {
   return (
@@ -18,6 +22,10 @@ export default function Routing() {
           element={<RegistrazioneFornitori />}
         />
         <Route path="/dashboard" element={<WeddingDashboard />} />
+        <Route path="/fornitori" element={<FornitoriPage />} />
+        <Route path="/ispirazioni" element={<IspirazioniPage />} />
+        <Route path="/idee" element={<IdeeConsigliPage />} />
+        <Route path="/community" element={<CommunityPage />} />
       </Route>
     </Routes>
   );
