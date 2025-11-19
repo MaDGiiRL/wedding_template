@@ -7,10 +7,11 @@ import GuestManagementPanel from "../components/Dashboard/GuestManagementPanel";
 import MyReview from "../components/Dashboard/MyReview";
 import MyReviews from "../components/Dashboard/UserReviewsWidget";
 import WeddingWebsitePanel from "../components/Dashboard/WeddingWebsitePanel";
+
+
 const SIDEBAR_ITEMS = [
   "Dashboard",
   "My Profile",
-  "Vendor Manager",
   "Checklist",
   "Budget Calculator",
   "Real Wedding",
