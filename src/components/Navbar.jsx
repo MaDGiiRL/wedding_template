@@ -14,9 +14,9 @@ export default function Navbar() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-full bg-rose-500 flex items-center justify-center text-white text-lg font-semibold">
-              M
+          <Link to="/" className="flex items-center gap-1">
+            <div className="w-10 rounded-full  flex items-center justify-center text-white text-lg font-semibold">
+              <img src="/src/assets/logo.png" alt="" />
             </div>
             <span className="font-semibold text-lg tracking-tight">
               <span className="text-slate-900">Mio</span>

@@ -1,4 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+/* ─────────────────────────── */
+/*         WP CONFIG           */
+/* ─────────────────────────── */
+
+// 👉 Meglio usare le env di Vite (puoi anche lasciare stringhe hardcoded per test)
+const WP_BASE_URL = import.meta.env.VITE_WP_BASE_URL || "https://TUO-SITO-WP.com";
+const WP_PAGE_ID = import.meta.env.VITE_WP_PAGE_ID || 7945;
+const WP_USERNAME = import.meta.env.VITE_WP_USERNAME || "il-tuo-utente-wp";
+const WP_APP_PASSWORD =
+  import.meta.env.VITE_WP_APP_PASSWORD || "LA_APP_PASSWORD_GENERATA";
+
+// helper per Authorization header (Basic Auth)
+const WP_AUTH_HEADER =
+  "Basic " + btoa(`${WP_USERNAME}:${WP_APP_PASSWORD}`);
 
 /* ─────────────────────────── */
 /*           HELPERS           */
@@ -216,6 +231,46 @@ export default function WeddingWebsitePanel() {
     receptionTime: "19:30",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+
+  /* 🔽 Carica dati da WordPress all'avvio */
+  useEffect(() => {
+    async function loadFromWP() {
+      try {
+        setLoading(true);
+
+        const res = await fetch(
+          `${WP_BASE_URL}/wp-json/wp/v2/pages/${WP_PAGE_ID}`
+        );
+
+        if (!res.ok) {
+          console.error("Errore caricamento WP:", res.status);
+          return;
+        }
+
+        const page = await res.json();
+        const stored =
+          page.meta && page.meta.wedding_data
+            ? JSON.parse(page.meta.wedding_data)
+            : null;
+
+        if (stored && typeof stored === "object") {
+          setForm((prev) => ({
+            ...prev,
+            ...stored, // merge: quello salvato su WP sovrascrive il default
+          }));
+        }
+      } catch (err) {
+        console.error("Errore fetch WordPress:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadFromWP();
+  }, []);
+
   const handleChange = (field, value) => {
     setForm((prev) => ({
       ...prev,
@@ -223,9 +278,41 @@ export default function WeddingWebsitePanel() {
     }));
   };
 
-  const handleSave = () => {
-    console.log("Wedding website simulation data:", form);
-    alert("Dati salvati (solo simulazione frontend).");
+  /* 💾 Salva su WordPress via REST */
+  const handleSave = async () => {
+    try {
+      setSaving(true);
+
+      const res = await fetch(
+        `${WP_BASE_URL}/wp-json/wp/v2/pages/${WP_PAGE_ID}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: WP_AUTH_HEADER,
+          },
+          body: JSON.stringify({
+            meta: {
+              // chiave meta "wedding_data" sul tuo WP
+              wedding_data: JSON.stringify(form),
+            },
+          }),
+        }
+      );
+
+      if (!res.ok) {
+        console.error("Errore salvataggio WP:", res.status);
+        alert("Errore nel salvataggio su WordPress 😢");
+        return;
+      }
+
+      alert("Dati salvati su WordPress ✅");
+    } catch (err) {
+      console.error("Errore salvataggio WordPress:", err);
+      alert("Errore nel salvataggio su WordPress 😢");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -240,6 +327,11 @@ export default function WeddingWebsitePanel() {
             Modifica i contenuti e guarda in tempo reale l’anteprima del tuo
             sito di matrimonio.
           </p>
+          {loading && (
+            <p className="mt-1 text-[11px] text-slate-400">
+              Carico i dati da WordPress...
+            </p>
+          )}
         </div>
         <a
           href="https://macasatoresc.com/website/madgiirl99/"
@@ -449,13 +541,15 @@ export default function WeddingWebsitePanel() {
             </div>
           </div>
 
+          {/* BOTTONI */}
           <div className="flex justify-end">
             <button
               type="button"
               onClick={handleSave}
-              className="rounded-full bg-rose-500 px-5 py-2 text-xs font-semibold text-white hover:bg-rose-600"
+              disabled={saving}
+              className="rounded-full bg-rose-500 px-5 py-2 text-xs font-semibold text-white hover:bg-rose-600 disabled:opacity-60"
             >
-              Save (simulazione)
+              {saving ? "Salvataggio..." : "Save su WordPress"}
             </button>
           </div>
         </div>
