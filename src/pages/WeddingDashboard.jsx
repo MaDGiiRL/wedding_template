@@ -1,4 +1,9 @@
 import { useState } from "react";
+import ChecklistPanel from "../components/Dashboard/ChecklistPanel";
+import BudgetCalculatorPanel from "../components/Dashboard/BudgetCalculatorPanel";
+import ProfilePanel from "../components/Dashboard/ProfilePanel";
+import RealWeddingPanel from "../components/Dashboard/RealWeddingPanel";
+import GuestManagementPanel from "../components/Dashboard/GuestManagementPanel";
 
 const SIDEBAR_ITEMS = [
   "Dashboard",
@@ -11,6 +16,88 @@ const SIDEBAR_ITEMS = [
   "My Reviews",
   "Wedding Website",
 ];
+
+const CHECKLIST_SECTIONS = [
+  {
+    month: "iulie 1998",
+    tasks: [
+      "Create your wedding website",
+      "Find and book your florist",
+      "Find and book your photographer",
+      "Find and book your venue",
+      "Find and book your videographer",
+      "Find and book your wedding planner",
+      "Find and order your wedding dress, suit, or tux",
+      "Plan your engagement party",
+      "Schedule an engagement photo shoot",
+    ],
+  },
+  {
+    month: "septembrie 1998",
+    tasks: [
+      "Finalize your guest list",
+      "Find and book your DJ",
+      "Find and book your band",
+      "Find and book your ceremony musician",
+      "Find and book your officiant",
+      "Find and order your event rentals",
+      "Find and order your wedding cake",
+      "Find and order your wedding invitations",
+      "Order attire for your wedding party",
+      "Research songs",
+      "Update your vendor team",
+    ],
+  },
+  {
+    month: "noiembrie 1998",
+    tasks: [
+      "Book accommodations for your wedding night",
+      "Find and book your hair and makeup vendor",
+      "Find and book your transportation vendor",
+      "Find and order your partner's attire",
+      "Plan and book your honeymoon",
+      "Purchase your wedding accessories",
+      "Schedule your ceremony rehearsal",
+    ],
+  },
+  {
+    month: "ianuarie 1999",
+    tasks: [
+      "Order alcohol for your wedding",
+      "Plan your wedding ceremony",
+      "Purchase guest book",
+      "Purchase your wedding rings",
+      "Write your vows",
+    ],
+  },
+  {
+    month: "martie 1999",
+    tasks: [
+      "Call guests who have not RSVP'd",
+      "Finalize your vendor team",
+      "Write a sweet note to your partner",
+      "Assign duties to wedding party",
+      "Confirm final details with all of your vendors",
+      "Confirm all final deposits",
+      "Pack for your honeymoon",
+      "Prepare toasts",
+      "Pull together last-minute essentials",
+      "Drop off decor to reception venue",
+      "Congratulations! You're married!",
+      "Change your last name",
+      "Review your vendor team",
+      "Send thank-you notes",
+      "Store your wedding attire",
+    ],
+  },
+  {
+    month: "aprilie 1999",
+    tasks: ["Submit your Real Wedding to be featured on MaCasatoresc.com"],
+  },
+];
+
+const CHECKLIST_DONE = 0;
+const CHECKLIST_TOTAL = 48;
 
 export default function WeddingDashboard() {
   const [activeSection, setActiveSection] = useState("Dashboard");
@@ -47,27 +134,29 @@ export default function WeddingDashboard() {
           {/* PANNELLO DINAMICO DESTRA */}
           <main className="flex-1 space-y-6">
             {activeSection === "Dashboard" && <DashboardOverview />}
-            {activeSection === "My Profile" && <Placeholder title="My Profile" />}
-            {activeSection === "Vendor Manager" && (
-              <Placeholder title="Vendor Manager" subtitle="0 of 0 categories hired. Start building your vendor team." />
-            )}
-            {activeSection === "Checklist" && (
-              <Placeholder title="Checklist" subtitle="0 out of 48 tasks completed. Let’s plan your big day step by step." />
-            )}
-            {activeSection === "Budget Calculator" && (
-              <Placeholder title="Budget Calculator" subtitle="Track your wedding expenses and stay on budget." />
-            )}
-            {activeSection === "Real Wedding" && (
-              <Placeholder title="Real Wedding" subtitle="Save inspiration and ideas for your own wedding." />
-            )}
-            {activeSection === "Guest Management" && (
-              <GuestManagementPanel />
-            )}
+            {activeSection === "My Profile" && <ProfilePanel />}
+            {/* {activeSection === "Vendor Manager" && (
+              <Placeholder
+                title="Vendor Manager"
+                subtitle="0 di 0 categorie assunte. Inizia a costruire il tuo team di fornitori."
+              />
+            )} */}
+            {activeSection === "Checklist" && <ChecklistPanel />}
+            {activeSection === "Budget Calculator" && <BudgetCalculatorPanel />}
+            {activeSection === "Real Wedding" && <RealWeddingPanel />}
+            {activeSection === "Guest Management" && <GuestManagementPanel />}
+
             {activeSection === "My Reviews" && (
-              <Placeholder title="My Reviews" subtitle="Here you’ll find all the reviews you’ve written." />
+              <Placeholder
+                title="My Reviews"
+                subtitle="Troverai qui tutte le recensioni che hai scritto."
+              />
             )}
             {activeSection === "Wedding Website" && (
-              <Placeholder title="Wedding Website" subtitle="Create a personalized website for your guests." />
+              <Placeholder
+                title="Wedding Website"
+                subtitle="Crea un sito web per il tuo matrimonio da condividere con gli invitati."
+              />
             )}
           </main>
         </div>
@@ -99,228 +188,298 @@ function SidebarItem({ label, active, onClick }) {
 function DashboardOverview() {
   return (
     <>
-      {/* HEADER + HAPPILY MARRIED */}
+      {/* FELICEMENTE SPOSATI + INFO MATRIMONIO */}
       <section className="grid gap-4 md:grid-cols-[2fr,1.3fr]">
         <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-5 flex flex-col justify-between">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-xs font-medium text-slate-500">Welcome back,</p>
+              <p className="text-xs font-medium text-slate-500">Bentornata,</p>
               <h1 className="text-xl sm:text-2xl font-semibold text-slate-900">
                 Madgiirl99
               </h1>
               <p className="text-xs text-slate-500 mt-1">
-                Here’s a quick overview of your wedding planning journey.
+                Ecco una panoramica del tuo percorso di organizzazione del
+                matrimonio.
               </p>
             </div>
           </div>
 
           <div className="mt-5 grid gap-3 sm:grid-cols-3 text-xs">
             <div className="rounded-2xl bg-slate-50 px-3 py-3">
-              <p className="text-slate-500">Wedding Date</p>
-              <p className="mt-1 font-semibold text-slate-900">30 March 1999</p>
+              <p className="text-slate-500">Data del matrimonio</p>
+              <p className="mt-1 font-semibold text-slate-900">30 marzo 1999</p>
             </div>
             <div className="rounded-2xl bg-slate-50 px-3 py-3">
-              <p className="text-slate-500">Status</p>
+              <p className="text-slate-500">Stato</p>
               <p className="mt-1 font-semibold text-slate-900">
-                Just said yes? 🎉
+                Hai appena detto di sì? 🎉
               </p>
             </div>
             <div className="rounded-2xl bg-slate-50 px-3 py-3">
-              <p className="text-slate-500">Planning Stage</p>
-              <p className="mt-1 font-semibold text-slate-900">
-                Let&apos;s get started!
-              </p>
+              <p className="text-slate-500">Fase di pianificazione</p>
+              <p className="mt-1 font-semibold text-slate-900">Iniziamo!</p>
             </div>
           </div>
         </div>
 
         <div className="bg-gradient-to-br from-rose-500 to-rose-400 rounded-3xl text-white p-5 flex flex-col justify-between shadow-lg">
           <div className="space-y-1">
-            <p className="text-sm font-medium">Happily Married 🎉</p>
+            <p className="text-sm font-medium">Felicemente sposati 🎉</p>
             <p className="text-3xl font-semibold leading-tight">
               9731
               <span className="block text-sm font-normal text-rose-50 mt-1">
-                Days
+                Giorni
               </span>
             </p>
           </div>
           <div className="mt-4 text-xs text-rose-50 space-y-1">
-            <p>Wedding date</p>
-            <p className="font-semibold">30 March 1999</p>
+            <p>e</p>
+            <p className="font-semibold">30 marzo 1999</p>
           </div>
         </div>
       </section>
 
-      {/* STATUS + VENDOR TEAM */}
+      {/* STATO + TEAM FORNITORI */}
       <section className="grid gap-4 md:grid-cols-[2fr,1.3fr]">
-        {/* STATUS CARD */}
+        {/* STATO */}
         <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-5">
           <div className="flex items-center justify-between gap-2 mb-4">
             <div>
-              <h2 className="text-sm font-semibold text-slate-900">Status</h2>
+              <h2 className="text-sm font-semibold text-slate-900">Stato</h2>
               <p className="text-xs text-slate-500">
-                Just said yes? Let&apos;s get started!
+                Hai appena detto di sì? Iniziamo!
               </p>
             </div>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-3 text-xs">
-            <StatusMetric label="Services Hired" value="0" total="0" />
-            <StatusMetric label="Tasks completed" value="0" total="48" />
-            <StatusMetric label="Guests Attending" value="0" total="0" />
+            <StatusMetric label="Servizi assunti" value="0" total="0" />
+            <StatusMetric
+              label="Compiti completati"
+              value={CHECKLIST_DONE}
+              total={CHECKLIST_TOTAL}
+            />
+            <StatusMetric label="Ospiti presenti" value="0" total="0" />
           </div>
 
           <p className="mt-4 text-xs text-slate-500">
-            0 of 0 categories hired · Start booking your dream vendor team.
+            0 di 0 categorie assunte · Inizia a creare il tuo team di fornitori
+            dei sogni.
           </p>
         </div>
 
-        {/* VENDOR TEAM CARD */}
+        {/* TEAM FORNITORI */}
         <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-5 flex flex-col">
           <div className="flex items-center justify-between mb-3">
             <div>
               <h2 className="text-sm font-semibold text-slate-900">
-                Your vendor team
+                Il tuo team di fornitori
               </h2>
-              <p className="text-xs text-slate-500">
-                0 of 0 categories hired
-              </p>
+              <p className="text-xs text-slate-500">0 di 0 categorie assunte</p>
             </div>
             <button className="text-[11px] font-medium text-rose-500 hover:text-rose-600">
-              View all my vendors
+              Visualizza tutti i miei fornitori
             </button>
           </div>
 
           <div className="border border-dashed border-slate-200 rounded-2xl px-3 py-4 text-center text-xs text-slate-500 flex-1 flex flex-col justify-center">
-            <p className="font-medium text-slate-700 mb-1">Search By Vendors</p>
+            <p className="font-medium text-slate-700 mb-1">
+              Ricerca per fornitori
+            </p>
             <p className="mb-3">
-              in <span className="font-semibold">Location</span>
+              In <span className="font-semibold">Posizione</span>
             </p>
             <button className="inline-flex items-center justify-center rounded-full bg-rose-500 px-4 py-2 text-xs font-medium text-white hover:bg-rose-600 transition">
-              Find vendors
+              Cerca fornitori
             </button>
           </div>
         </div>
       </section>
 
-      {/* GUEST LIST OVERVIEW + WEDDING DETAILS */}
+      {/* OSPITI + DETTAGLI MATRIMONIO */}
       <section className="grid gap-4 lg:grid-cols-[1.5fr,1.2fr]">
-        {/* GUEST LIST OVERVIEW */}
+        {/* PANORAMICA LISTA OSPITI */}
         <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-5">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-sm font-semibold text-slate-900">
-                Guest List Overview
+                Panoramica della lista degli ospiti
               </h2>
               <p className="text-xs text-slate-500">
-                Keep track of who’s coming to each event.
+                Tieni traccia delle presenze per ogni evento.
               </p>
             </div>
             <button className="text-[11px] font-medium text-rose-500 hover:text-rose-600">
-              Guest List
+              Lista degli invitati
             </button>
           </div>
 
           <div className="space-y-3 text-xs">
-            <GuestRow label="Wedding" />
-            <GuestRow label="Rehearsal Dinner" />
-            <GuestRow label="Shower" />
-            <GuestRow label="Dance Party" />
+            <GuestRowIt label="Nozze" />
+            <GuestRowIt label="Cena di prova" />
+            <GuestRowIt label="Doccia" />
+            <GuestRowIt label="Festa danzante" />
           </div>
         </div>
 
-        {/* WEDDING DETAILS */}
+        {/* DETTAGLI MATRIMONIO */}
         <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-5">
           <h2 className="text-sm font-semibold text-slate-900 mb-2">
-            Wedding details
+            Dettagli del matrimonio
           </h2>
           <p className="text-xs text-slate-500 mb-4">
-            Add key details about your wedding to personalize your planning
-            tools.
+            Aggiungi dettagli chiave per personalizzare i tuoi strumenti di
+            pianificazione.
           </p>
-          <div className="space-y-3 text-xs">
-            <div className="flex items-center justify-between rounded-2xl border border-slate-100 px-3 py-2.5">
-              <span className="text-slate-600">Wedding date</span>
-              <span className="text-slate-900 font-medium">30 March 1999</span>
+
+          <div className="space-y-3 text-xs mb-4">
+            <DetailRow label="Colore" value="... coppie" />
+            <DetailRow label="Stagione" value="... coppie" />
+            <DetailRow label="Stile" value="... coppie" />
+            <DetailRow label="Nome del designer" value="... coppie" />
+            <DetailRow label="Luna di miele" value="... coppie" />
+          </div>
+
+          <div className="rounded-2xl border border-slate-100 px-3 py-3 text-xs space-y-1 mb-4">
+            <p className="text-slate-600">Sito web per matrimoni</p>
+            <button className="text-[11px] font-medium text-rose-500 hover:text-rose-600">
+              Visualizza il sito web
+            </button>
+            <p className="text-[11px] text-slate-500 truncate">
+              https://macasatoresc.com/website/madgiirl99/
+            </p>
+          </div>
+
+          <button className="w-full rounded-full bg-slate-900 px-4 py-2 text-xs font-medium text-white hover:bg-slate-800 transition">
+            Modifica dettagli del matrimonio
+          </button>
+        </div>
+      </section>
+
+      {/* COMPITI + BILANCIO / LISTA OSPITI VUOTA */}
+      <section className="grid gap-4 lg:grid-cols-[1.5fr,1.2fr]">
+        {/* COMPITI */}
+        <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-5">
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-sm font-semibold text-slate-900">
+              0 di 48 completati
+            </h2>
+            <button className="text-[11px] font-medium text-rose-500 hover:text-rose-600">
+              Visualizza tutte le attività
+            </button>
+          </div>
+          <p className="text-xs text-slate-500 mb-4">Prossimi compiti</p>
+
+          <div className="space-y-2 text-xs">
+            <TaskRow label="Crea il sito web del tuo matrimonio" />
+            <TaskRow label="Trova e prenota il tuo fiorista" />
+          </div>
+        </div>
+
+        {/* BILANCIO + LISTA OSPITI VUOTA */}
+        <div className="space-y-4">
+          <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-5">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-sm font-semibold text-slate-900">Bilancio</h2>
+              <button className="text-[11px] font-medium text-rose-500 hover:text-rose-600">
+                Visualizza il budget
+              </button>
             </div>
-            <div className="flex items-center justify-between rounded-2xl border border-slate-100 px-3 py-2.5">
-              <span className="text-slate-600">Location</span>
-              <span className="text-slate-400">Add location</span>
-            </div>
-            <div className="flex items-center justify-between rounded-2xl border border-slate-100 px-3 py-2.5">
-              <span className="text-slate-600">Guest count</span>
-              <span className="text-slate-400">Add guests</span>
+
+            <div className="grid grid-cols-2 gap-3 text-xs">
+              <div className="rounded-2xl border border-slate-100 px-3 py-3">
+                <p className="text-slate-500 mb-1">Costo stimato</p>
+                <p className="text-base font-semibold text-slate-900">Ron0</p>
+              </div>
+              <div className="rounded-2xl border border-slate-100 px-3 py-3">
+                <p className="text-slate-500 mb-1">Costo finale</p>
+                <p className="text-base font-semibold text-slate-900">Ron0</p>
+              </div>
             </div>
           </div>
 
-          <button className="mt-4 w-full rounded-full bg-slate-900 px-4 py-2 text-xs font-medium text-white hover:bg-slate-800 transition">
-            Edit wedding details
-          </button>
+          <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-5 text-xs">
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="text-sm font-semibold text-slate-900">
+                Vedi la lista degli ospiti
+              </h2>
+              <button className="text-[11px] font-medium text-rose-500 hover:text-rose-600">
+                Lista degli invitati
+              </button>
+            </div>
+            <p className="text-slate-500">
+              Non hai ancora aggiunto nessun ospite.
+            </p>
+          </div>
         </div>
       </section>
     </>
   );
 }
 
-/* STATUS METRIC */
+/* STATUS METRIC (IT) */
 function StatusMetric({ label, value, total }) {
   return (
     <div className="rounded-2xl border border-slate-100 bg-slate-50/60 px-3 py-3">
       <p className="text-[11px] text-slate-500 mb-1">{label}</p>
       <p className="text-base font-semibold text-slate-900">
         {value}
-        <span className="text-[11px] text-slate-400 ml-1">Out of {total}</span>
+        <span className="text-[11px] text-slate-400 ml-1">
+          {label === "Compiti completati" ? "Su " : "Fuori da "}
+          {total}
+        </span>
       </p>
     </div>
   );
 }
 
-/* GUEST ROW */
-function GuestRow({ label }) {
+/* RIGA OSPITI (IT) */
+function GuestRowIt({ label }) {
   return (
     <div className="rounded-2xl border border-slate-100 px-3 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
       <p className="font-medium text-slate-800 text-xs">{label}</p>
       <p className="text-[11px] text-slate-500">
-        <span className="font-semibold">0</span> Attended ·{" "}
-        <span className="font-semibold">0</span> Invited ·{" "}
-        <span className="font-semibold">0</span> Declined
+        <span className="font-semibold">0</span> Partecipanti ·{" "}
+        <span className="font-semibold">0</span> Invitati ·{" "}
+        <span className="font-semibold">0</span> Rifiutati
       </p>
     </div>
   );
 }
 
-/* PANNELLI PLACEHOLDER PER LE ALTRE SEZIONI */
+/* RIGA DETTAGLIO MATRIMONIO */
+function DetailRow({ label, value }) {
+  return (
+    <div className="flex items-center justify-between rounded-2xl border border-slate-100 px-3 py-2.5">
+      <span className="text-slate-600">{label}</span>
+      <span className="text-slate-400">{value}</span>
+    </div>
+  );
+}
+
+/* RIGA COMPITO */
+function TaskRow({ label }) {
+  return (
+    <div className="flex items-center gap-2 rounded-2xl border border-slate-100 px-3 py-2.5">
+      <span className="h-3 w-3 rounded-full border border-slate-300" />
+      <div className="flex-1">
+        <p className="text-slate-700">{label}</p>
+      </div>
+    </div>
+  );
+}
+
+/* PLACEHOLDER PER ALTRE SEZIONI */
 function Placeholder({ title, subtitle }) {
   return (
     <section className="bg-white rounded-3xl border border-slate-100 shadow-sm p-6">
       <h2 className="text-sm font-semibold text-slate-900 mb-1">{title}</h2>
       <p className="text-xs text-slate-500 mb-4">
-        {subtitle || "This section will contain tools and details for your planning."}
+        {subtitle ||
+          "Questa sezione conterrà strumenti dedicati per l’organizzazione del tuo matrimonio."}
       </p>
       <div className="border border-dashed border-slate-200 rounded-2xl px-4 py-8 text-center text-xs text-slate-500">
-        Content coming soon…
-      </div>
-    </section>
-  );
-}
-
-/* PANELLINO SPECIFICO PER "Guest Management" */
-function GuestManagementPanel() {
-  return (
-    <section className="space-y-4">
-      <div className="bg-white rounded-3xl border border-slate-100 shadow-sm p-5">
-        <h2 className="text-sm font-semibold text-slate-900 mb-1">
-          Guest Management
-        </h2>
-        <p className="text-xs text-slate-500 mb-4">
-          Manage your guests, RSVPs and events all in one place.
-        </p>
-        <div className="space-y-3 text-xs">
-          <GuestRow label="Wedding" />
-          <GuestRow label="Rehearsal Dinner" />
-          <GuestRow label="Shower" />
-          <GuestRow label="Dance Party" />
-        </div>
+        Contenuto in arrivo…
       </div>
     </section>
   );

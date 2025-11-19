@@ -4,7 +4,6 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Registrati from "../pages/Registrati";
 import RegistrazioneFornitori from "../pages/RegistrazioneFornitori";
-import VendorDashboard from "../pages/VendorDashboard";
 import WeddingDashboard from "../pages/WeddingDashboard";
 
 export default function Routing() {
@@ -18,7 +17,6 @@ export default function Routing() {
           path="/fornitori/registrazione"
           element={<RegistrazioneFornitori />}
         />
-        <Route path="/fornitori/dashboard" element={<VendorDashboard />} />
         <Route path="/dashboard" element={<WeddingDashboard />} />
       </Route>
     </Routes>

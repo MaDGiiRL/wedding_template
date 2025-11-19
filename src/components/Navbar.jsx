@@ -10,7 +10,7 @@ export default function Navbar() {
     }`;
 
   return (
-    <header className="border-b bg-white/80 backdrop-blur sticky top-0 z-20">
+    <header className=" bg-white/80 backdrop-blur sticky top-0 z-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -26,13 +26,10 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <NavLink to="/fornitori/dashboard" className={navLinkClasses}>
-              Dashboard 1
-            </NavLink>
             <NavLink to="/dashboard" className={navLinkClasses}>
-              Dashboard 2
+              Dashboard
             </NavLink>
-            {/* <NavLink to="/fornitori" className={navLinkClasses}>
+            <NavLink to="/fornitori" className={navLinkClasses}>
               Fornitori
             </NavLink>
             <NavLink to="/ispirazioni" className={navLinkClasses}>
@@ -43,7 +40,7 @@ export default function Navbar() {
             </NavLink>
             <NavLink to="/community" className={navLinkClasses}>
               Community
-            </NavLink> */}
+            </NavLink>
           </nav>
 
           {/* Auth + CTA */}
