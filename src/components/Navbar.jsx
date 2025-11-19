@@ -26,7 +26,13 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <NavLink to="/fornitori" className={navLinkClasses}>
+            <NavLink to="/fornitori/dashboard" className={navLinkClasses}>
+              Dashboard 1
+            </NavLink>
+            <NavLink to="/dashboard" className={navLinkClasses}>
+              Dashboard 2
+            </NavLink>
+            {/* <NavLink to="/fornitori" className={navLinkClasses}>
               Fornitori
             </NavLink>
             <NavLink to="/ispirazioni" className={navLinkClasses}>
@@ -37,7 +43,7 @@ export default function Navbar() {
             </NavLink>
             <NavLink to="/community" className={navLinkClasses}>
               Community
-            </NavLink>
+            </NavLink> */}
           </nav>
 
           {/* Auth + CTA */}
